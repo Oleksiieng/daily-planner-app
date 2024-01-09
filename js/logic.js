@@ -29,6 +29,7 @@ $(document).ready(function () {
         schedulerData[date][hour].push(text);
     
         localStorage.setItem('scheduler', JSON.stringify(schedulerData));
+        displayMessage('Appointment added to LocalStorage');
     }
 
     function generateTimeBlocks() {
@@ -60,3 +61,15 @@ $(document).ready(function () {
     generateTimeBlocks();
     loadEvents();
 });
+
+function displayMessage(message) {
+    let messageElement = $('<div>')
+        .addClass('alert alert-success fixed-top text-center')
+        .text(message);
+
+    $('body').prepend(messageElement);
+
+    setTimeout(function() {
+        messageElement.fadeOut();
+    }, 1000);
+}

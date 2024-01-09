@@ -70,3 +70,14 @@ header {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
+.alert {
+  z-index: 9999;
+  width: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin-top: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .05);
+
+}
