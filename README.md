@@ -26,7 +26,7 @@ The site can be accessed at https://oleksiieng.github.io/daily-planner-app
 
 - Start page.
 
-![The webpage](./assets/images/screen1.png)
+![The webpage](./img/screen.png)
 
 
 ## Table of Contents
