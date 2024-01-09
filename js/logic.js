@@ -6,8 +6,15 @@ $(document).ready(function () {
 
     function saveEvent(hour, text) {
         let date = dayjs().format('YYYY-MM-DD');
-        let key = date + '-' + hour;
-        localStorage.setItem(key, text);
+        let schedulerData = JSON.parse(localStorage.getItem('/scheduler')) || {};
+
+        if (!schedulerData[date]) {
+            schedulerData[date] = {};
+        }
+
+        schedulerData[date][hour] = text;
+
+        localStorage.setItem('scheduler', JSON.stringify(schedulerData));
     }
 
     function generateTimeBlocks() {
