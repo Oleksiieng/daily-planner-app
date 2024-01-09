@@ -3,17 +3,31 @@ $(document).ready(function () {
     let currentDate = dayjs().format('dddd, MMMM D, YYYY');
     $('#currentDay').text(currentDate);
 
+    function loadEvents() {
+        let date = dayjs().format('YYYY-MM-DD');
+        let schedulerData = JSON.parse(localStorage.getItem('scheduler')) || {};
+
+        if (schedulerData[date]) {
+            Object.keys(schedulerData[date]).forEach(function(hour) {
+                let text = schedulerData[date][hour];
+                $('.description[data-hour="' + hour + '"]').val(text);
+            });
+        }
+    }
 
     function saveEvent(hour, text) {
         let date = dayjs().format('YYYY-MM-DD');
-        let schedulerData = JSON.parse(localStorage.getItem('/scheduler')) || {};
-
+        let schedulerData = JSON.parse(localStorage.getItem('scheduler')) || {};
+    
         if (!schedulerData[date]) {
             schedulerData[date] = {};
         }
-
-        schedulerData[date][hour] = text;
-
+    
+        if (!schedulerData[date][hour]) {
+            schedulerData[date][hour] = [];
+        }
+        schedulerData[date][hour].push(text);
+    
         localStorage.setItem('scheduler', JSON.stringify(schedulerData));
     }
 
@@ -42,5 +56,7 @@ $(document).ready(function () {
         });
     }
 
+   
     generateTimeBlocks();
+    loadEvents();
 });
